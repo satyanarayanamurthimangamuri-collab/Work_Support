@@ -12,7 +12,7 @@ export default function Logo() {
     <div className="flex items-center gap-2.5">
       {!imageFailed ? (
         <img
-          src="/logo.svg"
+          src={`${import.meta.env.BASE_URL}logo.svg`}
           alt="Work Support logo"
           className="h-9 w-9 rounded-md object-contain"
           onError={() => setImageFailed(true)}
