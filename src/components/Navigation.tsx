@@ -11,15 +11,21 @@ export default function Navigation({ className = "", onNavigate }: NavigationPro
   const path = usePath();
   const navigate = useNavigate();
   const listRef = useRef<HTMLUListElement>(null);
-  const [pill, setPill] = useState({ left: 0, width: 0 });
+  const [pill, setPill] = useState({ left: 0, top: 0, width: 0, height: 0 });
 
   useLayoutEffect(() => {
     const list = listRef.current;
     const activeItem = list?.querySelector<HTMLElement>("[aria-current='page']");
     if (!list || !activeItem) return;
 
-    setPill({ left: activeItem.offsetLeft, width: activeItem.offsetWidth });
-    const update = () => setPill({ left: activeItem.offsetLeft, width: activeItem.offsetWidth });
+    const update = () =>
+      setPill({
+        left: activeItem.offsetLeft,
+        top: activeItem.offsetTop,
+        width: activeItem.offsetWidth,
+        height: activeItem.offsetHeight,
+      });
+    update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, [path]);
@@ -29,8 +35,12 @@ export default function Navigation({ className = "", onNavigate }: NavigationPro
       <ul ref={listRef} className="relative flex flex-col items-start gap-1 md:flex-row md:items-center md:gap-1">
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 rounded-pill bg-light-blue transition-[transform,width] duration-250 ease-standard"
-          style={{ transform: `translateX(${pill.left}px)`, width: pill.width }}
+          className="pointer-events-none absolute rounded-pill bg-light-blue transition-[transform,width,height] duration-250 ease-standard"
+          style={{
+            transform: `translate(${pill.left}px, ${pill.top}px)`,
+            width: pill.width,
+            height: pill.height,
+          }}
         />
         {NAV_ITEMS.map((item) => {
           const isActive = path === item.path;
