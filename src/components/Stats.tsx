@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 interface Stat {
   value: string;
   label: string;
@@ -9,6 +11,37 @@ const STATS: Stat[] = [
   { value: "5-Step", label: "Guided Process" },
 ];
 
+function useCountUp(target: number) {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      setValue(target);
+      return;
+    }
+
+    const startedAt = performance.now();
+    let frame = 0;
+    const update = (now: number) => {
+      const progress = Math.min((now - startedAt) / 900, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.round(target * eased));
+      if (progress < 1) frame = requestAnimationFrame(update);
+    };
+    frame = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(frame);
+  }, [target]);
+
+  return value;
+}
+
+function StatValue({ value }: { value: string }) {
+  const match = value.match(/^(\d+)(-.*)?$/);
+  const animatedValue = useCountUp(match ? Number(match[1]) : 0);
+  return <>{match ? `${animatedValue}${match[2]}` : value}</>;
+}
+
 export default function Stats() {
   return (
     <dl className="flex flex-wrap items-start gap-x-10 gap-y-5">
@@ -17,7 +50,7 @@ export default function Stats() {
           <dt className="order-2 font-mono text-[11px] font-medium uppercase tracking-wider text-text-muted">
             {stat.label}
           </dt>
-          <dd className="order-1 text-2xl font-bold text-navy">{stat.value}</dd>
+          <dd className="order-1 text-2xl font-bold text-navy"><StatValue value={stat.value} /></dd>
         </div>
       ))}
     </dl>

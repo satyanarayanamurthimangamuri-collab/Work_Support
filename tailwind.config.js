@@ -17,6 +17,10 @@ export default {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"],
       },
+      transitionTimingFunction: {
+        standard: "cubic-bezier(0.4, 0, 0.2, 1)",
+        "premium-out": "cubic-bezier(0.16, 1, 0.3, 1)",
+      },
       borderRadius: {
         pill: "999px",
       },

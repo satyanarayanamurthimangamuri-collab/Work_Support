@@ -32,7 +32,7 @@ export default function Button({
     <button
       className={[
         "inline-flex items-center justify-center gap-2 rounded-pill font-semibold",
-        "transition-colors duration-200 ease-out",
+        "transition-[background-color,transform] duration-200 ease-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
         "disabled:cursor-not-allowed disabled:opacity-60",
         VARIANT_CLASSES[variant],
         SIZE_CLASSES[size],

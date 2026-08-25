@@ -35,7 +35,7 @@ export default function Header() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded-lg border border-green-500 bg-green-50 px-3 py-2 text-[13px] font-semibold text-green-700 transition-all hover:bg-green-100"
+            className="flex items-center gap-1.5 rounded-lg border border-green-500 bg-green-50 px-3 py-2 text-[13px] font-semibold text-green-700 transition-[background-color] duration-180 ease-standard hover:bg-green-100"
           >
             <MessageCircle size={16} />
             WhatsApp
@@ -59,7 +59,7 @@ export default function Header() {
       {/* Mobile menu */}
       <div
         className={[
-          "overflow-hidden border-t border-border bg-white transition-[max-height] duration-300 ease-out lg:hidden",
+          "overflow-hidden border-t border-border bg-white transition-[max-height] duration-300 ease-standard lg:hidden",
           mobileOpen ? "max-h-[500px]" : "max-h-0 border-t-0",
         ].join(" ")}
       >
