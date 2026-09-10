@@ -13,7 +13,7 @@ export default function Footer() {
     <footer className="border-t border-border bg-white">
       <div className="mx-auto flex max-w-8xl flex-col gap-6 px-6 py-10 lg:flex-row lg:items-center lg:justify-between lg:px-10">
         <div>
-          <span className="text-[15px] font-bold text-navy">Work Support</span>
+          <span className="text-[15px] font-bold text-navy">TechworkSupport</span>
           <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-text-muted">
             Practical Guidance · Professional Growth
           </p>
@@ -46,7 +46,7 @@ export default function Footer() {
         </nav>
 
         <p className="font-mono text-[11px] text-text-muted">
-          &copy; {year} Work Support
+          &copy; {year} TechworkSupport
         </p>
       </div>
     </footer>
