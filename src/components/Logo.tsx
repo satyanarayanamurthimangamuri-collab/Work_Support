@@ -13,7 +13,7 @@ export default function Logo() {
       {!imageFailed ? (
         <img
           src={`${import.meta.env.BASE_URL}logo.svg`}
-          alt="Work Support logo"
+          alt="TechworkSupport logo"
           className="h-9 w-9 rounded-md object-contain"
           onError={() => setImageFailed(true)}
         />

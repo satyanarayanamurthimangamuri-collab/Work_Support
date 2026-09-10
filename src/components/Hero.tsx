@@ -16,11 +16,11 @@ export default function Hero() {
         <div className="flex flex-col items-start">
           <span className="hero-badge mb-6 inline-flex items-center gap-2 rounded-pill border border-border bg-light-blue px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-blue">
             <span className="h-1.5 w-1.5 rounded-full bg-blue" aria-hidden="true" />[
-            Work Support ]
+            TechworkSupport ]
           </span>
 
           <h1 className="text-[40px] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[52px] lg:text-[64px]">
-            <span className="hero-h1-l1 inline-block">Professional Support</span>
+            <span className="hero-h1-l1 inline-block">TechworkSupport</span>
             <br />
             <span className="hero-h1-l2 inline-block">for Your Work &amp; Career</span>
           </h1>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const SITE_NAME = "Work Support";
+const SITE_NAME = "TechworkSupport";
 const SITE_URL = "https://techworksupport.com";
 
 interface PageMetaOptions {
@@ -33,15 +33,18 @@ export function usePageMeta({ title, description, path }: PageMetaOptions) {
   useEffect(() => {
     const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
     const url = `${SITE_URL}${path === "/" ? "/" : path}`;
+    const keywordText = `${SITE_NAME}, Work Support, practical technical support, project guidance, training, professional growth`;
 
     document.title = fullTitle;
     setMetaTag("description", description);
+    setMetaTag("keywords", keywordText);
     setCanonical(url);
 
     setMetaTag("og:title", fullTitle, "property");
     setMetaTag("og:description", description, "property");
     setMetaTag("og:url", url, "property");
     setMetaTag("og:type", "website", "property");
+    setMetaTag("og:site_name", SITE_NAME, "property");
 
     setMetaTag("twitter:title", fullTitle);
     setMetaTag("twitter:description", description);
