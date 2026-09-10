@@ -109,6 +109,35 @@ export default function WorkSupport() {
     let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (!meta) { meta = document.createElement("meta"); meta.name = "description"; document.head.appendChild(meta); }
     meta.content = description;
+
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "TechworkSupport",
+      serviceType: [
+        "Technical Support",
+        "Project Guidance",
+        "Training & Skill Development",
+        "Professional Guidance"
+      ],
+      provider: {
+        "@type": "Organization",
+        name: "TechworkSupport",
+        url: "https://techworksupport.com/"
+      },
+      areaServed: "Worldwide",
+      description: "Practical technical support, project guidance and training for working professionals, freelancers and students.",
+      url: "https://techworksupport.com/work-support"
+    };
+
+    let script = document.querySelector<HTMLScriptElement>('script[data-schema="service-page"]');
+    if (!script) {
+      script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.setAttribute("data-schema", "service-page");
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(jsonLd);
   }, []);
 
   return <main>

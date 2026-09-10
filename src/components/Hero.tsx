@@ -22,14 +22,14 @@ export default function Hero() {
           <h1 className="text-[40px] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[52px] lg:text-[64px]">
             <span className="hero-h1-l1 inline-block">TechworkSupport</span>
             <br />
-            <span className="hero-h1-l2 inline-block">Technical Support &amp; Project Guidance</span>
+            <span className="hero-h1-l2 inline-block">Technical Support for Work, Projects &amp; Learning</span>
           </h1>
 
           <p className="hero-desc mt-6 max-w-[520px] text-[16px] leading-[1.7] text-text-muted sm:text-[17px]">
-            TechworkSupport gives working professionals, freelancers and students
-            practical one-to-one technical support, project guidance and training
-            — helping you fix problems, build skills and move forward with
-            confidence.
+            TechworkSupport helps working professionals, freelancers and students
+            with practical technical support, project guidance, troubleshooting and
+            structured training — so you can solve real work problems and build
+            the skills you need.
           </p>
 
           <div className="hero-ctas mt-8 flex flex-col gap-3 sm:flex-row">
