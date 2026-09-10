@@ -3,9 +3,9 @@ import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function Home() {
   usePageMeta({
-    title: "TechworkSupport",
+    title: "TechworkSupport | Technical Support, Project Guidance & Training",
     description:
-      "TechworkSupport gives working professionals, freelancers and students practical guidance for technical problems, projects and skill development.",
+      "TechworkSupport offers practical technical support, project guidance and structured training for working professionals, freelancers and students.",
     path: "/",
   });
 
