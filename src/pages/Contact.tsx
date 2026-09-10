@@ -5,11 +5,12 @@ import Button from "../components/Button";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successPending, setSuccessPending] = useState(false);
   const [error, setError] = useState("");
   const [invalidField, setInvalidField] = useState("");
+  const phoneNumber = "+918500285767";
+  const phoneDisplay = "+91 85002 85767";
   const whatsappNumber = "918500285767";
   const whatsappMessage = "Hi! I need help with my project. Can you assist me?";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -21,7 +22,7 @@ export default function Contact() {
     path: "/contact",
   });
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.checkValidity()) {
@@ -34,38 +35,24 @@ export default function Contact() {
     setLoading(true);
     setError("");
     setInvalidField("");
-    setSuccessPending(false);
+    setSuccessPending(true);
 
-    const formData = new FormData(form);
-    // Add a subject line for the email
-    formData.append("subject", "New contact form submission from TechworkSupport");
-    // Add auto-reply message
-    formData.append("_autoresponse", "Thanks for reaching out! We received your message and will get back to you shortly.");
-
-    try {
-      const response = await fetch("https://formsubmit.co/techworksupport@gmail.com", {
-        method: "POST",
-        body: formData
-      });
-
-      if (response.ok) {
-        setSuccessPending(true);
-        window.setTimeout(() => setSubmitted(true), 500);
-        // Reset form after successful submission
-        setTimeout(() => {
-          (event.currentTarget as HTMLFormElement).reset();
-        }, 0);
-      } else {
-        setSuccessPending(false);
-        setError("Something went wrong. Please try again.");
-      }
-    } catch (err) {
-      console.error("Error:", err);
-      setSuccessPending(false);
-      setError("Failed to send message. Please check your connection and try again.");
-    } finally {
-      setLoading(false);
+    const hiddenSubject = form.querySelector<HTMLInputElement>('input[name="_subject"]');
+    if (hiddenSubject) {
+      hiddenSubject.value = "New contact form submission from TechworkSupport";
     }
+
+    const hiddenCaptcha = form.querySelector<HTMLInputElement>('input[name="_captcha"]');
+    if (hiddenCaptcha) {
+      hiddenCaptcha.value = "false";
+    }
+
+    const hiddenTemplate = form.querySelector<HTMLInputElement>('input[name="_template"]');
+    if (hiddenTemplate) {
+      hiddenTemplate.value = "table";
+    }
+
+    form.submit();
   }
 
   return (
@@ -86,13 +73,13 @@ export default function Contact() {
           </div>
 
           <div className="mt-12 flex flex-col gap-5 border-t border-white/20 pt-6">
-            <a href="mailto:techworksupport@gmail.com" className="flex items-center gap-3 text-[14px] text-white transition-colors duration-150 ease-standard hover:text-[#A9C9EA]">
+            <a href="mailto:smtm44023@gmail.com" className="flex items-center gap-3 text-[14px] text-white transition-colors duration-150 ease-standard hover:text-[#A9C9EA]">
               <Mail size={17} aria-hidden="true" />
-              <span>techworksupport@gmail.com</span>
+              <span>smtm44023@gmail.com</span>
             </a>
-            <a href="tel:+918500285767" className="flex items-center gap-3 text-[14px] text-white transition-colors duration-150 ease-standard hover:text-[#A9C9EA]">
+            <a href={`tel:${phoneNumber}`} className="flex items-center gap-3 text-[14px] text-white transition-colors duration-150 ease-standard hover:text-[#A9C9EA]">
               <Phone size={17} aria-hidden="true" />
-              <span>+91 85002 85767</span>
+              <span>{phoneDisplay}</span>
             </a>
             <div className="flex items-center gap-3 text-[14px] text-[#D5E2EC]">
               <MapPin size={17} aria-hidden="true" />
@@ -117,22 +104,24 @@ export default function Contact() {
             Message on WhatsApp
           </a>
 
-          {submitted ? (
-          <div className="confirmation-panel rounded-2xl border border-border bg-white p-8">
-            <h2 className="text-[18px] font-bold text-navy">Message sent! ✓</h2>
-            <p className="mt-2 text-[14px] leading-[1.7] text-text-muted">
-              Thanks for reaching out! We've received your message and will get back to you shortly at the email you provided.
-            </p>
-          </div>
-          ) : (
           <>
             {error && (
               <div className="mb-6 rounded-lg border border-red-300 bg-red-50 p-4">
                 <p className="text-[14px] text-red-700">{error}</p>
               </div>
             )}
-            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
-            <div className="flex flex-col gap-2">
+            <form
+              onSubmit={handleSubmit}
+              action="https://formsubmit.co/smtm44023@gmail.com"
+              method="POST"
+              acceptCharset="UTF-8"
+              noValidate
+              className="flex flex-col gap-5"
+            >
+              <input type="hidden" name="_subject" value="New contact form submission from TechworkSupport" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <div className="flex flex-col gap-2">
               <label htmlFor="name" className="text-[13px] font-semibold text-navy">
                 Name
               </label>
@@ -176,7 +165,6 @@ export default function Contact() {
             </Button>
           </form>
           </>
-          )}
         </div>
       </section>
     </main>
