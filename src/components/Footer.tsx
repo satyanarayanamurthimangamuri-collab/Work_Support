@@ -5,7 +5,7 @@ import { useNavigate } from "../hooks/RouterContext";
 export default function Footer() {
   const navigate = useNavigate();
   const year = new Date().getFullYear();
-  const whatsappNumber = "919440750258";
+  const whatsappNumber = "8500285767";
   const whatsappMessage = "Hi! I need help with my project. Can you assist me?";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 

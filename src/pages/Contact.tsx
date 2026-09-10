@@ -10,7 +10,7 @@ export default function Contact() {
   const [successPending, setSuccessPending] = useState(false);
   const [error, setError] = useState("");
   const [invalidField, setInvalidField] = useState("");
-  const whatsappNumber = "919440750258";
+  const whatsappNumber = "8500285767";
   const whatsappMessage = "Hi! I need help with my project. Can you assist me?";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -90,9 +90,9 @@ export default function Contact() {
               <Mail size={17} aria-hidden="true" />
               <span>techworksupport@gmail.com</span>
             </a>
-            <a href="tel:+919440750258" className="flex items-center gap-3 text-[14px] text-white transition-colors duration-150 ease-standard hover:text-[#A9C9EA]">
+            <a href="tel:+918500285767" className="flex items-center gap-3 text-[14px] text-white transition-colors duration-150 ease-standard hover:text-[#A9C9EA]">
               <Phone size={17} aria-hidden="true" />
-              <span>+91 94407 50258</span>
+              <span>+91 85002 85767</span>
             </a>
             <div className="flex items-center gap-3 text-[14px] text-[#D5E2EC]">
               <MapPin size={17} aria-hidden="true" />

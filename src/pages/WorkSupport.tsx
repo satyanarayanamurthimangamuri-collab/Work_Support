@@ -18,7 +18,7 @@ import Button from "../components/Button";
 import useRevealOnScroll from "../hooks/useRevealOnScroll";
 import { useNavigate } from "../hooks/RouterContext";
 
-const whatsappNumber = "919440750258";
+const whatsappNumber = "8500285767";
 const whatsappMessage = "Hi! I need help with my project. Can you assist me?";
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
