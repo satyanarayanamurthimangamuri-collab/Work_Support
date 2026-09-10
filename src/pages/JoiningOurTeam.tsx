@@ -1,9 +1,17 @@
 import PageHero from "../components/PageHero";
 import Button from "../components/Button";
 import { useNavigate } from "../hooks/RouterContext";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function JoiningOurTeam() {
   const navigate = useNavigate();
+
+  usePageMeta({
+    title: "Join Our Team",
+    description:
+      "Join the Work Support team as a specialist who helps people solve real technical and professional challenges with clear guidance.",
+    path: "/joining-our-team",
+  });
 
   return (
     <main>

@@ -1,5 +1,6 @@
 import PageHero from "../components/PageHero";
 import useRevealOnScroll from "../hooks/useRevealOnScroll";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const TRACKS = [
   {
@@ -85,6 +86,13 @@ function TrainingTrack({ track, index }: { track: TrainingTrackData; index: numb
 }
 
 export default function Training() {
+  usePageMeta({
+    title: "Training & Skill Development",
+    description:
+      "Structured technology training tracks for database, data engineering, SQL, cloud, analytics and practical work-related skills.",
+    path: "/training",
+  });
+
   return (
     <main>
       <PageHero

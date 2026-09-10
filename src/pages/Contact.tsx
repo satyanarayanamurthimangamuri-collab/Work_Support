@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { Check, LoaderCircle, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import PageHero from "../components/PageHero";
 import Button from "../components/Button";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -12,6 +13,13 @@ export default function Contact() {
   const whatsappNumber = "919440750258";
   const whatsappMessage = "Hi! I need help with my project. Can you assist me?";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  usePageMeta({
+    title: "Contact Work Support",
+    description:
+      "Contact Work Support to get technical help, project guidance, training support and practical next steps for your work challenge.",
+    path: "/contact",
+  });
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
