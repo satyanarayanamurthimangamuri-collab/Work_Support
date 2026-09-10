@@ -34,7 +34,7 @@ export default function Hero() {
 
           <div className="hero-ctas mt-8 flex flex-col gap-3 sm:flex-row">
             <Button variant="primary" size="lg" onClick={() => navigate("/work-support")}>
-              Get Work Support
+              Get TechworkSupport
               <ArrowRight size={17} strokeWidth={2.5} />
             </Button>
             <Button variant="secondary" size="lg" onClick={() => navigate("/training")}>

@@ -9,7 +9,7 @@ export default function JoiningOurTeam() {
   usePageMeta({
     title: "Join Our Team",
     description:
-      "Join the Work Support team as a specialist who helps people solve real technical and professional challenges with clear guidance.",
+      "Join the TechworkSupport team as a specialist who helps people solve real technical and professional challenges with clear guidance.",
     path: "/joining-our-team",
   });
 

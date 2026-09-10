@@ -15,9 +15,9 @@ export default function Contact() {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   usePageMeta({
-    title: "Contact Work Support",
+    title: "Contact TechworkSupport",
     description:
-      "Contact Work Support to get technical help, project guidance, training support and practical next steps for your work challenge.",
+      "Contact TechworkSupport to get technical help, project guidance, training support and practical next steps for your work challenge.",
     path: "/contact",
   });
 
@@ -38,7 +38,7 @@ export default function Contact() {
 
     const formData = new FormData(form);
     // Add a subject line for the email
-    formData.append("subject", "New contact form submission from Work Support");
+    formData.append("subject", "New contact form submission from TechworkSupport");
     // Add auto-reply message
     formData.append("_autoresponse", "Thanks for reaching out! We received your message and will get back to you shortly.");
 
