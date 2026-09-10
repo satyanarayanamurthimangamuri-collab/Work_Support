@@ -73,9 +73,9 @@ export default function Contact() {
           </div>
 
           <div className="mt-12 flex flex-col gap-5 border-t border-white/20 pt-6">
-            <a href="mailto:smtm44023@gmail.com" className="flex items-center gap-3 text-[14px] text-white transition-colors duration-150 ease-standard hover:text-[#A9C9EA]">
+            <a href="mailto:techworksupport@gmail.com" className="flex items-center gap-3 text-[14px] text-white transition-colors duration-150 ease-standard hover:text-[#A9C9EA]">
               <Mail size={17} aria-hidden="true" />
-              <span>smtm44023@gmail.com</span>
+              <span>techworksupport@gmail.com</span>
             </a>
             <a href={`tel:${phoneNumber}`} className="flex items-center gap-3 text-[14px] text-white transition-colors duration-150 ease-standard hover:text-[#A9C9EA]">
               <Phone size={17} aria-hidden="true" />
@@ -112,7 +112,7 @@ export default function Contact() {
             )}
             <form
               onSubmit={handleSubmit}
-              action="https://formsubmit.co/smtm44023@gmail.com"
+              action="https://formsubmit.co/techworksupport@gmail.com"
               method="POST"
               acceptCharset="UTF-8"
               noValidate
