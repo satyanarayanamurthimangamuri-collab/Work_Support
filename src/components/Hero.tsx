@@ -26,10 +26,10 @@ export default function Hero() {
           </h1>
 
           <p className="hero-desc mt-6 max-w-[520px] text-[16px] leading-[1.7] text-text-muted sm:text-[17px]">
-            TechworkSupport helps working professionals, consultants and students
-            with practical technical support, project guidance, troubleshooting and
-            structured training — so you can solve real work problems and build
-            the skills you need.
+            TechworkSupport provides practical technical support, project guidance,
+            troubleshooting and structured training for working professionals,
+            consultants and students who need real help solving work problems and
+            building technical confidence.
           </p>
 
           <div className="hero-ctas mt-8 flex flex-col gap-3 sm:flex-row">

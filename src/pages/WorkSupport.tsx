@@ -105,7 +105,7 @@ export default function WorkSupport() {
 
   useEffect(() => {
     document.title = "TechworkSupport | Practical Technical & Career Guidance";
-    const description = "TechworkSupport provides practical technical guidance, project support, structured training and professional skill development to help you solve problems and move forward.";
+    const description = "TechworkSupport provides practical technical support, project guidance, training and professional growth for working professionals, consultants and students who need real help with their technical work.";
     let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (!meta) { meta = document.createElement("meta"); meta.name = "description"; document.head.appendChild(meta); }
     meta.content = description;
@@ -126,7 +126,7 @@ export default function WorkSupport() {
         url: "https://techworksupport.com/"
       },
       areaServed: "Worldwide",
-      description: "Practical technical support, project guidance and training for working professionals, consultants and students.",
+      description: "TechworkSupport provides practical technical support, project guidance and training for working professionals, consultants and students.",
       url: "https://techworksupport.com/work-support"
     };
 
