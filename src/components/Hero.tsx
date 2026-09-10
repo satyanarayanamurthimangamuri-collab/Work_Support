@@ -26,7 +26,7 @@ export default function Hero() {
           </h1>
 
           <p className="hero-desc mt-6 max-w-[520px] text-[16px] leading-[1.7] text-text-muted sm:text-[17px]">
-            TechworkSupport helps working professionals, freelancers and students
+            TechworkSupport helps working professionals, consultants and students
             with practical technical support, project guidance, troubleshooting and
             structured training — so you can solve real work problems and build
             the skills you need.

@@ -40,7 +40,7 @@ const AUDIENCES = [
   ["Professionals", ["Data & analytics", "Automation", "Workflow improvement", "Technical problem solving"]],
 ] as const;
 
-const SKILLS = ["Python", "SQL", "Excel", "Power BI", "Java", "C", "C++", "JavaScript", "HTML", "CSS", "React", "Data Analytics", "AI & Machine Learning", "Git & GitHub", "Databases", "Web Development"];
+const SKILLS = ["Python", "SQL", "Excel", "Power BI", "Java", "C", "C++", "JavaScript", "HTML", "CSS", "React", "Data Analytics", "AI & Machine Learning", "Git & GitHub", "Databases", "Web Development", "Pentaho", "DBA", "Middleware", "Salesforce", "Apache Hop", "AWS Data Engineer", "Azure Data Engineering", "Redshift", "Snowflake"];
 
 const STEPS = [
   ["01", "Tell Us Your Problem", "Explain what you're working on, what you've tried and where you're stuck."],
@@ -126,7 +126,7 @@ export default function WorkSupport() {
         url: "https://techworksupport.com/"
       },
       areaServed: "Worldwide",
-      description: "Practical technical support, project guidance and training for working professionals, freelancers and students.",
+      description: "Practical technical support, project guidance and training for working professionals, consultants and students.",
       url: "https://techworksupport.com/work-support"
     };
 

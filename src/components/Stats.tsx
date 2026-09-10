@@ -39,7 +39,8 @@ function useCountUp(target: number) {
 function StatValue({ value }: { value: string }) {
   const match = value.match(/^(\d+)(-.*)?$/);
   const animatedValue = useCountUp(match ? Number(match[1]) : 0);
-  return <>{match ? `${animatedValue}${match[2]}` : value}</>;
+  const suffix = match?.[2] ?? "";
+  return <>{match ? `${animatedValue}${suffix}` : value}</>;
 }
 
 export default function Stats() {

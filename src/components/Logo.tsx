@@ -26,8 +26,8 @@ export default function Logo() {
         </div>
       )}
       <div className="flex flex-col leading-tight">
-        <span className="text-[15px] font-bold tracking-tight text-navy">
-          Work
+        <span className="text-[12.5px] font-bold tracking-tight text-navy">
+          Techwork
           <br />
           Support
         </span>

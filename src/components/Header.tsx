@@ -14,12 +14,12 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-[#FCFDFC]/95 backdrop-blur">
-      <div className="mx-auto flex max-w-8xl items-center justify-between gap-6 px-6 py-3 lg:px-10">
+      <div className="mx-auto flex max-w-8xl items-center justify-between gap-4 px-4 py-2.5 lg:px-8">
         {/* Brand */}
         <div className="flex items-center gap-3">
           <Logo />
-          <div className="hidden h-8 w-px bg-border md:block" aria-hidden="true" />
-          <span className="hidden font-mono text-[10px] font-medium uppercase leading-tight tracking-wider text-text-muted md:block">
+          <div className="hidden h-7 w-px bg-border md:block" aria-hidden="true" />
+          <span className="hidden font-mono text-[9px] font-medium uppercase leading-[1.2] tracking-wider text-text-muted md:block">
             Practical Guidance ·
             <br />
             Professional Growth
@@ -30,14 +30,14 @@ export default function Header() {
         <Navigation className="hidden lg:block" />
 
         {/* Desktop buttons */}
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-2.5 lg:flex">
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded-lg border border-green-500 bg-green-50 px-3 py-2 text-[13px] font-semibold text-green-700 transition-[background-color] duration-180 ease-standard hover:bg-green-100"
+            className="flex items-center gap-1.5 rounded-lg border border-green-500 bg-green-50 px-2.5 py-1.5 text-[12.5px] font-semibold text-green-700 transition-[background-color] duration-180 ease-standard hover:bg-green-100"
           >
-            <MessageCircle size={16} />
+            <MessageCircle size={15} />
             WhatsApp
           </a>
           <Button variant="primary" size="md" onClick={() => navigate("/work-support")}>

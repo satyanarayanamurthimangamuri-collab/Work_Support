@@ -33,7 +33,7 @@ export function usePageMeta({ title, description, path }: PageMetaOptions) {
   useEffect(() => {
     const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
     const url = `${SITE_URL}${path === "/" ? "/" : path}`;
-    const keywordText = `${SITE_NAME}, Work Support, practical technical support, project guidance, training, professional growth`;
+    const keywordText = `${SITE_NAME}, Work Support, practical technical support, project guidance, training, professional growth, Pentaho, DBA, Middleware, Salesforce, Apache Hop, AWS Data Engineer, Azure Data Engineering, Redshift, Snowflake`;
 
     document.title = fullTitle;
     setMetaTag("description", description);
