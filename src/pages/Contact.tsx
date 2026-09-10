@@ -10,7 +10,7 @@ export default function Contact() {
   const [successPending, setSuccessPending] = useState(false);
   const [error, setError] = useState("");
   const [invalidField, setInvalidField] = useState("");
-  const whatsappNumber = "8500285767";
+  const whatsappNumber = "918500285767";
   const whatsappMessage = "Hi! I need help with my project. Can you assist me?";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
