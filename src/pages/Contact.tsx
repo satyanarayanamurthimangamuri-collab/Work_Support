@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import emailjs from "@emailjs/browser";
 import { LoaderCircle, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import PageHero from "../components/PageHero";
 import Button from "../components/Button";
@@ -14,6 +15,9 @@ export default function Contact() {
   const whatsappNumber = "918500285767";
   const whatsappMessage = "Hi! I need help with my project. Can you assist me?";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+  const emailJsPublicKey = "dKDqtHbPpfbRz1-pK";
+  const emailJsServiceId = "service_bsso01p";
+  const emailJsTemplateId = "template_xkr3y9o";
 
   usePageMeta({
     title: "Contact TechworkSupport",
@@ -38,29 +42,22 @@ export default function Contact() {
 
     try {
       const formData = new FormData(form);
-      const name = String(formData.get("name") ?? "").trim();
-      const email = String(formData.get("email") ?? "").trim();
-      const phone = String(formData.get("phone") ?? "").trim();
-      const message = String(formData.get("message") ?? "").trim();
+      const params = {
+        from_name: String(formData.get("name") ?? ""),
+        from_email: String(formData.get("email") ?? ""),
+        phone: String(formData.get("phone") ?? ""),
+        message: String(formData.get("message") ?? ""),
+      };
 
-      const subject = encodeURIComponent("New contact form submission from TechworkSupport");
-      const body = encodeURIComponent(
-        [
-          `Name: ${name}`,
-          `Email: ${email}`,
-          `Phone: ${phone}`,
-          "",
-          "What do you need help with?",
-          message,
-        ].join("\n")
-      );
+      await emailjs.send(emailJsServiceId, emailJsTemplateId, params, {
+        publicKey: emailJsPublicKey,
+      });
 
-      window.location.href = `mailto:techworksupport@gmail.com?subject=${subject}&body=${body}`;
       form.reset();
       setSubmitted(true);
     } catch (err) {
-      console.error("Contact form error:", err);
-      setError("Failed to prepare your message. Please try again or message us on WhatsApp.");
+      console.error("EmailJS error:", err);
+      setError("Failed to send your message. Please try again or message us on WhatsApp.");
     } finally {
       setLoading(false);
     }
