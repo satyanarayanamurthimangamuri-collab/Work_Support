@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from "react";
-import emailjs from "@emailjs/browser";
 import { LoaderCircle, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import PageHero from "../components/PageHero";
 import Button from "../components/Button";
@@ -15,9 +14,6 @@ export default function Contact() {
   const whatsappNumber = "918500285767";
   const whatsappMessage = "Hi! I need help with my project. Can you assist me?";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-  const emailJsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "";
-  const emailJsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "";
-  const emailJsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "";
 
   usePageMeta({
     title: "Contact TechworkSupport",
@@ -36,39 +32,35 @@ export default function Contact() {
       return;
     }
 
-    if (!emailJsPublicKey || !emailJsServiceId || !emailJsTemplateId) {
-      setError("Email service is not configured yet. Add your EmailJS public key, service ID, and template ID in the environment variables.");
-      return;
-    }
-
     setLoading(true);
     setError("");
     setInvalidField("");
 
     try {
       const formData = new FormData(form);
-      const params = {
-        from_name: String(formData.get("name") ?? ""),
-        from_email: String(formData.get("email") ?? ""),
-        phone: String(formData.get("phone") ?? ""),
-        message: String(formData.get("message") ?? ""),
-        subject: "New contact form submission from TechworkSupport",
-      };
+      const name = String(formData.get("name") ?? "").trim();
+      const email = String(formData.get("email") ?? "").trim();
+      const phone = String(formData.get("phone") ?? "").trim();
+      const message = String(formData.get("message") ?? "").trim();
 
-      await emailjs.send(
-        emailJsServiceId,
-        emailJsTemplateId,
-        params,
-        {
-          publicKey: emailJsPublicKey,
-        }
+      const subject = encodeURIComponent("New contact form submission from TechworkSupport");
+      const body = encodeURIComponent(
+        [
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `Phone: ${phone}`,
+          "",
+          "What do you need help with?",
+          message,
+        ].join("\n")
       );
 
+      window.location.href = `mailto:techworksupport@gmail.com?subject=${subject}&body=${body}`;
       form.reset();
       setSubmitted(true);
     } catch (err) {
-      console.error("EmailJS error:", err);
-      setError("Failed to send your message. Please try again or message us on WhatsApp.");
+      console.error("Contact form error:", err);
+      setError("Failed to prepare your message. Please try again or message us on WhatsApp.");
     } finally {
       setLoading(false);
     }
