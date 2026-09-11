@@ -1,12 +1,13 @@
 import { useState, type FormEvent } from "react";
-import { Check, LoaderCircle, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import { LoaderCircle, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import PageHero from "../components/PageHero";
 import Button from "../components/Button";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function Contact() {
   const [loading, setLoading] = useState(false);
-  const [successPending, setSuccessPending] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [invalidField, setInvalidField] = useState("");
   const phoneNumber = "+918500285767";
@@ -14,6 +15,9 @@ export default function Contact() {
   const whatsappNumber = "918500285767";
   const whatsappMessage = "Hi! I need help with my project. Can you assist me?";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+  const emailJsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "";
+  const emailJsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "";
+  const emailJsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "";
 
   usePageMeta({
     title: "Contact TechworkSupport",
@@ -22,7 +26,7 @@ export default function Contact() {
     path: "/contact",
   });
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.checkValidity()) {
@@ -32,27 +36,42 @@ export default function Contact() {
       return;
     }
 
+    if (!emailJsPublicKey || !emailJsServiceId || !emailJsTemplateId) {
+      setError("Email service is not configured yet. Add your EmailJS public key, service ID, and template ID in the environment variables.");
+      return;
+    }
+
     setLoading(true);
     setError("");
     setInvalidField("");
-    setSuccessPending(true);
 
-    const hiddenSubject = form.querySelector<HTMLInputElement>('input[name="_subject"]');
-    if (hiddenSubject) {
-      hiddenSubject.value = "New contact form submission from TechworkSupport";
+    try {
+      const formData = new FormData(form);
+      const params = {
+        from_name: String(formData.get("name") ?? ""),
+        from_email: String(formData.get("email") ?? ""),
+        phone: String(formData.get("phone") ?? ""),
+        message: String(formData.get("message") ?? ""),
+        subject: "New contact form submission from TechworkSupport",
+      };
+
+      await emailjs.send(
+        emailJsServiceId,
+        emailJsTemplateId,
+        params,
+        {
+          publicKey: emailJsPublicKey,
+        }
+      );
+
+      form.reset();
+      setSubmitted(true);
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setError("Failed to send your message. Please try again or message us on WhatsApp.");
+    } finally {
+      setLoading(false);
     }
-
-    const hiddenCaptcha = form.querySelector<HTMLInputElement>('input[name="_captcha"]');
-    if (hiddenCaptcha) {
-      hiddenCaptcha.value = "false";
-    }
-
-    const hiddenTemplate = form.querySelector<HTMLInputElement>('input[name="_template"]');
-    if (hiddenTemplate) {
-      hiddenTemplate.value = "table";
-    }
-
-    form.submit();
   }
 
   return (
@@ -104,67 +123,84 @@ export default function Contact() {
             Message on WhatsApp
           </a>
 
-          <>
-            {error && (
-              <div className="mb-6 rounded-lg border border-red-300 bg-red-50 p-4">
-                <p className="text-[14px] text-red-700">{error}</p>
-              </div>
-            )}
-            <form
-              onSubmit={handleSubmit}
-              action="https://formsubmit.co/techworksupport@gmail.com"
-              method="POST"
-              acceptCharset="UTF-8"
-              noValidate
-              className="flex flex-col gap-5"
-            >
-              <input type="hidden" name="_subject" value="New contact form submission from TechworkSupport" />
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_template" value="table" />
-              <div className="flex flex-col gap-2">
-              <label htmlFor="name" className="text-[13px] font-semibold text-navy">
-                Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                disabled={loading}
-                className={`${invalidField === "name" ? "field-error border-red-400" : "border-border"} rounded-lg border bg-white px-4 py-2.5 text-[14px] text-navy outline-none transition-[border-color] duration-150 ease-standard focus:border-blue disabled:opacity-50`}
-              />
+          {submitted ? (
+            <div className="confirmation-panel rounded-2xl border border-border bg-white p-8">
+              <h2 className="text-[18px] font-bold text-navy">Message sent! ✓</h2>
+              <p className="mt-2 text-[14px] leading-[1.7] text-text-muted">
+                Thanks for reaching out! We have received your message and phone number, and will get back to you shortly.
+              </p>
             </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-[13px] font-semibold text-navy">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                disabled={loading}
-                className={`${invalidField === "email" ? "field-error border-red-400" : "border-border"} rounded-lg border bg-white px-4 py-2.5 text-[14px] text-navy outline-none transition-[border-color] duration-150 ease-standard focus:border-blue disabled:opacity-50`}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="message" className="text-[13px] font-semibold text-navy">
-                What do you need help with?
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                disabled={loading}
-                rows={5}
-                className={`${invalidField === "message" ? "field-error border-red-400" : "border-border"} resize-none rounded-lg border bg-white px-4 py-2.5 text-[14px] text-navy outline-none transition-[border-color] duration-150 ease-standard focus:border-blue disabled:opacity-50`}
-              />
-            </div>
-            <Button type="submit" variant="primary" size="lg" className="min-w-[142px] self-start" disabled={loading || successPending}>
-              {successPending ? <Check size={17} aria-label="Message sent" /> : loading ? <LoaderCircle size={17} className="animate-spin" aria-label="Sending" /> : "Send message"}
-            </Button>
-          </form>
-          </>
+          ) : (
+            <>
+              {error && (
+                <div className="mb-6 rounded-lg border border-red-300 bg-red-50 p-4">
+                  <p className="text-[14px] text-red-700">{error}</p>
+                </div>
+              )}
+              <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="name" className="text-[13px] font-semibold text-navy">
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    disabled={loading}
+                    className={`${invalidField === "name" ? "field-error border-red-400" : "border-border"} rounded-lg border bg-white px-4 py-2.5 text-[14px] text-navy outline-none transition-[border-color] duration-150 ease-standard focus:border-blue disabled:opacity-50`}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="email" className="text-[13px] font-semibold text-navy">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    disabled={loading}
+                    className={`${invalidField === "email" ? "field-error border-red-400" : "border-border"} rounded-lg border bg-white px-4 py-2.5 text-[14px] text-navy outline-none transition-[border-color] duration-150 ease-standard focus:border-blue disabled:opacity-50`}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="phone" className="text-[13px] font-semibold text-navy">
+                    Preferred contact number
+                  </label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
+                    pattern="[0-9+()\-\s]{7,20}"
+                    title="Please enter a valid phone number"
+                    required
+                    disabled={loading}
+                    placeholder="Enter your phone number"
+                    className={`${invalidField === "phone" ? "field-error border-red-400" : "border-border"} rounded-lg border bg-white px-4 py-2.5 text-[14px] text-navy outline-none transition-[border-color] duration-150 ease-standard focus:border-blue disabled:opacity-50`}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="message" className="text-[13px] font-semibold text-navy">
+                    What do you need help with?
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    disabled={loading}
+                    rows={5}
+                    className={`${invalidField === "message" ? "field-error border-red-400" : "border-border"} resize-none rounded-lg border bg-white px-4 py-2.5 text-[14px] text-navy outline-none transition-[border-color] duration-150 ease-standard focus:border-blue disabled:opacity-50`}
+                  />
+                </div>
+                <Button type="submit" variant="primary" size="lg" className="min-w-[142px] self-start" disabled={loading}>
+                  {loading ? <LoaderCircle size={17} className="animate-spin" aria-label="Sending" /> : "Send message"}
+                </Button>
+              </form>
+            </>
+          )}
         </div>
       </section>
     </main>
